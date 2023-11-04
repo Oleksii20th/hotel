@@ -1,6 +1,8 @@
 package com.company.hotel.login.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -8,25 +10,27 @@ import javax.validation.constraints.Size;
 import java.util.Set;
 
 /**
- Słowo "user" istnieje już w PostgreSQL, i nie może być używane jako nazwa tabeli. Dlatego zmieniamy na "users"
+ * Słowo "user" istnieje już w PostgreSQL, i nie może być używane jako nazwa tabeli. Dlatego zmieniamy na "users"
  **/
 
 
-@Data
 @Entity
 @Table(name = "users")
+@Getter
+@Setter
+@RequiredArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable=false, unique=true)
+    @Column(nullable = false, unique = true)
     @NotEmpty(message = "The field can't be empty.")
     private String username;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     @NotEmpty(message = "The field can't be empty.")
-    @Size(min=4)
+    @Size(min = 4)
     private String password;
 
     private boolean enabled;

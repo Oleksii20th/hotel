@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Klasa jest odpowiedzialna za logowanie do systemu poprzez formularz logowania i obsługę nieprawidłowych logowań.
@@ -35,7 +34,7 @@ public class LoginController {
         UserDTO user = userService.getUserDtoByUsername(username);
 
         if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            return "redirect:/hotel";
+            return "index";
         } else {
             model.addAttribute("loginError", "authentication");
             return "login";
