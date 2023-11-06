@@ -6,6 +6,8 @@ import com.company.hotel.security.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserServiceViewImpl implements UserServiceView {
 
@@ -17,10 +19,11 @@ public class UserServiceViewImpl implements UserServiceView {
 
     @Override
     public UserDTO getUserDtoByUsername(String username) {
-        User user = userService.findByUsername(username);
-        if (user != null) {
-            return userMapper.mapEntityToDto(user);
-        }
-        return null;
+        Optional<User> user = userService.findByUsername(username);
+        return user.map(users -> userMapper.mapEntityToDto(users)).orElse(null);
+    }
+    @Override
+    public void changePassword(String username, String currentPassword, String newPassword, String confirmationPassword) {
+        userService.savePassword(username, currentPassword, newPassword, confirmationPassword);
     }
 }
