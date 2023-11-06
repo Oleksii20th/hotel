@@ -1,6 +1,6 @@
-package com.company.hotel.login.dto;
+package com.company.hotel.security.dto;
 
-import com.company.hotel.login.entity.Role;
+import com.company.hotel.security.entity.Role;
 import lombok.Data;
 
 import java.util.Set;

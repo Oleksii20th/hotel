@@ -1,6 +1,6 @@
-package com.company.hotel.login.repository;
+package com.company.hotel.security.repository;
 
-import com.company.hotel.login.entity.User;
+import com.company.hotel.security.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

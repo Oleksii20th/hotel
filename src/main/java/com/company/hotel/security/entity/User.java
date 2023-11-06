@@ -1,4 +1,4 @@
-package com.company.hotel.login.entity;
+package com.company.hotel.security.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

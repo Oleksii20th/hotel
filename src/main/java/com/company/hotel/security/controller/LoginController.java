@@ -1,7 +1,7 @@
-package com.company.hotel.login.controller;
+package com.company.hotel.security.controller;
 
-import com.company.hotel.login.dto.UserDTO;
-import com.company.hotel.login.service.UserServiceViewImpl;
+import com.company.hotel.security.dto.UserDTO;
+import com.company.hotel.security.service.UserServiceViewImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;

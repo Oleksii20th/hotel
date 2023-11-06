@@ -1,7 +1,7 @@
-package com.company.hotel.login.service;
+package com.company.hotel.security.service;
 
-import com.company.hotel.login.entity.User;
-import com.company.hotel.login.repository.UserRepository;
+import com.company.hotel.security.entity.User;
+import com.company.hotel.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
-package com.company.hotel.login.mapper;
+package com.company.hotel.security.mapper;
 
-import com.company.hotel.login.dto.UserDTO;
-import com.company.hotel.login.entity.User;
+import com.company.hotel.security.dto.UserDTO;
+import com.company.hotel.security.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
