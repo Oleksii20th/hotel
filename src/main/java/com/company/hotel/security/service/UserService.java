@@ -8,5 +8,5 @@ public interface UserService {
 
     Optional<User> findByUsername(String username);
 
-    void savePassword(String username, String currentPassword, String newPassword, String confirmationPassword);
+    User saveUser(User user);
 }

@@ -22,8 +22,11 @@ public class UserServiceViewImpl implements UserServiceView {
         Optional<User> user = userService.findByUsername(username);
         return user.map(users -> userMapper.mapEntityToDto(users)).orElse(null);
     }
+
     @Override
-    public void changePassword(String username, String currentPassword, String newPassword, String confirmationPassword) {
-        userService.savePassword(username, currentPassword, newPassword, confirmationPassword);
+    public UserDTO save(UserDTO userDTO) {
+        User user = userMapper.mapDtoToEntity(userDTO);
+        userService.saveUser(user);
+        return userMapper.mapEntityToDto(user);
     }
 }

@@ -1,70 +1,35 @@
 package com.company.hotel.security.config;
 
 
-import com.company.hotel.security.jwt.JwtAuthenticationFilter;
-import com.company.hotel.security.jwt.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
 
+
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    private JwtUtil jwtUtil;
+public class SecurityConfig {
 
     @Autowired
     private DataSource dataSource;
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeRequests()
-                .antMatchers("/loginSubmit").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .rememberMe()
-                .tokenRepository(persistentTokenRepository())
-                .userDetailsService(userDetailsService())
-                .tokenValiditySeconds(86400)
-                .and()
-                .logout()
-                .permitAll()
-                .and()
-                .addFilterBefore(new JwtAuthenticationFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
-    }
-
     @Bean
-    public PersistentTokenRepository persistentTokenRepository() {
-        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
-        tokenRepository.setDataSource(dataSource);
-        return tokenRepository;
-    }
-
-    @Override
-    @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+                .authorizeHttpRequests().antMatchers("/register", "/login", "/saveUser", "/css/**", "/images/**").permitAll()
+                .anyRequest().authenticated().and()
+                .formLogin().loginPage("/login").loginProcessingUrl("/loginSubmit")
+                .defaultSuccessUrl("/").permitAll();
+        return http.build();
     }
 
     @Bean
@@ -72,20 +37,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return NoOpPasswordEncoder.getInstance();
     }
 
-    @Override
-    public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/css/**").antMatchers("/images/**");
+    @Bean
+    public UserDetailsService getDetailsService() {
+        return new UserDetailsServiceImpl();
     }
 
     @Bean
-    public UserDetailsService userDetailsService() {
-        JdbcDaoImpl userDetailsService = new JdbcDaoImpl();
-        userDetailsService.setDataSource(dataSource);
-        userDetailsService.setUsersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username = ?");
-        userDetailsService.setAuthoritiesByUsernameQuery("SELECT u.username, r.name FROM users u " +
-                "INNER JOIN user_roles ur ON u.id = ur.user_id " +
-                "INNER JOIN role r ON ur.role_id = r.id " +
-                "WHERE u.username = ?");
-        return userDetailsService;
+    public DaoAuthenticationProvider getAuthenticationProvider() {
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setUserDetailsService(getDetailsService());
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        return daoAuthenticationProvider;
     }
 }

@@ -6,7 +6,5 @@ public interface UserServiceView {
 
     UserDTO getUserDtoByUsername(String username);
 
-    void changePassword(String username, String currentPassword, String newPassword, String confirmationPassword);
-
-    void authentication(String username, String currentPassword, String newPassword, String confirmationPassword);
+    UserDTO save(UserDTO userDTO);
 }
