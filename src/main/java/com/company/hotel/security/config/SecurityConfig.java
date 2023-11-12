@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests().antMatchers("/register", "/login", "/saveUser", "/css/**", "/images/**").permitAll()
                 .anyRequest().authenticated().and()
                 .formLogin().loginPage("/login").loginProcessingUrl("/loginSubmit")
-                .defaultSuccessUrl("/").permitAll();
+                .defaultSuccessUrl("/").failureUrl("/login?loginError=authentication").permitAll();
         return http.build();
     }
 

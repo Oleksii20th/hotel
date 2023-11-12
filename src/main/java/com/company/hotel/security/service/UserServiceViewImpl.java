@@ -1,6 +1,7 @@
 package com.company.hotel.security.service;
 
 import com.company.hotel.security.dto.UserDTO;
+import com.company.hotel.security.entity.Role;
 import com.company.hotel.security.entity.User;
 import com.company.hotel.security.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class UserServiceViewImpl implements UserServiceView {
     @Override
     public UserDTO save(UserDTO userDTO) {
         User user = userMapper.mapDtoToEntity(userDTO);
+        user.setRole(Role.USER);
         userService.saveUser(user);
         return userMapper.mapEntityToDto(user);
     }

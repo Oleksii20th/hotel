@@ -8,8 +8,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.List;
 
@@ -29,16 +27,12 @@ public class User implements UserDetails {
     private long id;
 
     @Column(nullable = false, unique = true)
-    @NotEmpty(message = "The field can't be empty.")
     private String username;
 
     @Column(nullable = false, unique = true)
-    @NotEmpty(message = "The field can't be empty.")
     private String email;
 
     @Column(nullable = false)
-    @NotEmpty(message = "The field can't be empty.")
-    @Size(min = 4)
     private String password;
 
     private Role role;

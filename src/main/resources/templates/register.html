@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel Register Form</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body>
+<div class="container">
+    <h1 class="label">Register Form</h1>
+    <form class="login_form" method="post" th:action="@{/saveUser}" th:object="${userDTO}">
+        <div class="font">Username</div>
+        <input type="text" name="username" th:field="*{username}">
+        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+
+        <div class="font font2">Password</div>
+        <input type="password" name="password" th:field="*{password}">
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+
+        <div class="font font2">Repeat Password</div>
+        <input type="password" name="repeatPassword">
+
+        <div class="font font2">Email</div>
+        <input type="text" name="email" th:field="*{email}">
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+
+        <button type="submit">Register</button>
+    </form>
+</div>
+</body>
+</html>
