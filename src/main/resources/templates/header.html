@@ -5,17 +5,7 @@
 </head>
 <body>
 <div th:fragment = "header" class="header">
-    <div class="wrap">
-        <div class="header-top">
-            <div class="logo">
-                <a th:href="@{/index}"><img th:src="@{/images/c1.jpg}" title="logo" /></a>
-            </div>
-            <div class="contact-info">
-                <p class="phone">Call us : <a href="#">123456789</a></p>
-            </div>
-            <div class="clear"> </div>
-        </div>
-    </div>
+    <div class="header-top"></div>
     <div class="header-top-nav">
         <div class="wrap">
             <ul>
@@ -24,6 +14,11 @@
                 <li th:class="${currentPage == 'services' ? 'active' : ''}"><a th:href="@{/services}">Services</a></li>
                 <li th:class="${currentPage == 'gallery' ? 'active' : ''}"><a th:href="@{/gallery}">Gallery</a></li>
                 <li th:class="${currentPage == 'contact' ? 'active' : ''}"><a th:href="@{/contact}">Contact</a></li>
+                <div>
+                    <a th:href="@{/logout}">
+                        <img class="logout-image" th:src="@{/images/logout.png}">
+                    </a>
+                </div>
                 <div class="clear"> </div>
             </ul>
         </div>

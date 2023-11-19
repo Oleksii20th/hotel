@@ -22,6 +22,7 @@ import java.util.List;
 @Setter
 @RequiredArgsConstructor
 public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -61,4 +62,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }

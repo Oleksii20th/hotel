@@ -11,10 +11,12 @@
     <form class="login_form" method="post" th:action="@{/saveUser}" th:object="${userDTO}">
         <div class="font">Username</div>
         <input type="text" name="username" th:field="*{username}">
+        <br>
         <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
 
         <div class="font font2">Password</div>
         <input type="password" name="password" th:field="*{password}">
+        <br>
         <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 
         <div class="font font2">Repeat Password</div>
@@ -22,7 +24,13 @@
 
         <div class="font font2">Email</div>
         <input type="text" name="email" th:field="*{email}">
+        <br>
         <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+
+        <div>
+            <br>
+            <p>Already have an account? <a th:href="@{/login}">Back to Login</a></p>
+        </div>
 
         <button type="submit">Register</button>
     </form>

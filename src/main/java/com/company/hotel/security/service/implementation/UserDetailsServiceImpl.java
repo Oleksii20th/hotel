@@ -1,4 +1,4 @@
-package com.company.hotel.security.config;
+package com.company.hotel.security.service.implementation;
 
 import com.company.hotel.security.entity.User;
 import com.company.hotel.security.repository.UserRepository;
@@ -25,6 +25,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         } else {
             return user.get();
         }
-
     }
 }

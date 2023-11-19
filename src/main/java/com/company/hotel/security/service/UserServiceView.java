@@ -7,4 +7,5 @@ public interface UserServiceView {
     UserDTO getUserDtoByUsername(String username);
 
     UserDTO save(UserDTO userDTO);
+
 }

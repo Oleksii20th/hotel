@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
 	<title>Hotel Login Form</title>
 	<link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
@@ -16,6 +15,10 @@
 			<div th:if="${loginError == 'authentication'}" class="login_error">
 				<br>
 				<p> Invalid login or password. Please try again. </p>
+			</div>
+			<div>
+				<br>
+				<p>Don't have an account? <a th:href="@{/register}">Register here</a></p>
 			</div>
 			<button type="submit">Login</button>
 		</form>

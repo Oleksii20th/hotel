@@ -1,9 +1,11 @@
-package com.company.hotel.security.service;
+package com.company.hotel.security.service.implementation;
 
 import com.company.hotel.security.dto.UserDTO;
 import com.company.hotel.security.entity.Role;
 import com.company.hotel.security.entity.User;
 import com.company.hotel.security.mapper.UserMapper;
+import com.company.hotel.security.service.UserService;
+import com.company.hotel.security.service.UserServiceView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
