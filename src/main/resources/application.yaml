@@ -12,7 +12,7 @@ spring:
     driverClassName: org.postgresql.Driver
 jwt:
   secretKey: secretKey
-  expirationTime: 10000
+  expirationTime: 86400000
 management:
   endpoints:
     web:

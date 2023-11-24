@@ -8,4 +8,8 @@ public interface UserServiceView {
 
     UserDTO save(UserDTO userDTO);
 
+    boolean existsByUsername(String username);
+
+    boolean existsByEmail(String email);
+
 }

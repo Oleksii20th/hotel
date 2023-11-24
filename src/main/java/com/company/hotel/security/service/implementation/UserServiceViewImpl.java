@@ -33,4 +33,14 @@ public class UserServiceViewImpl implements UserServiceView {
         userService.saveUser(user);
         return userMapper.mapEntityToDto(user);
     }
+
+    @Override
+    public boolean existsByUsername(String username) {
+        return userService.existsByUsername(username);
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return userService.existsByEmail(email);
+    }
 }

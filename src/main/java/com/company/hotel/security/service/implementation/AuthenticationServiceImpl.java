@@ -33,9 +33,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public String registerNewUser(UserDTO userDTO, BindingResult bindingResult, String repeatPassword, Model model) {
 
-//        if(userRepository.existsByUsername(loginRequest.getUsername())){
-//            return User name is already in use;
-//        }
+        if (userService.existsByUsername(userDTO.getUsername())) {
+            bindingResult.rejectValue("username", "error.usernameAlreadyExist", "Username is already exists");
+        }
+
+        if (userService.existsByEmail(userDTO.getEmail())) {
+            bindingResult.rejectValue("email", "error.emailAlreadyExist", "Email is already exists");
+        }
 
         model.addAttribute("userDTO", userDTO);
         List<String> errorMessages = new ArrayList<>();
